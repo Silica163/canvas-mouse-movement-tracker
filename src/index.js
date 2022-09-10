@@ -58,4 +58,5 @@ const posData = {
 	}
 }
 console.log(posData);
-canvas.addEventListener("mousemove",posData.update)
+canvas.addEventListener("mousemove",posData.update);
+canvas.addEventListener("mousedown",canvas.requestPointerLock);
