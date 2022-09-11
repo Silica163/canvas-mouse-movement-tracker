@@ -2,37 +2,23 @@ const canvas = document.getElementById("main");
 const mCtx = canvas.getContext("2d");
 const mxCtx = document.getElementById("mxgraph").getContext("2d");
 const myCtx = document.getElementById("mygraph").getContext("2d");
-var pos = 0
+const mxyCtx = document.getElementById("mxy").getContext("2d");
+var pos = 0;
+var lastpos = {x:0,y:0}
 function drawT(x,y){
 	mCtx.strokeStyle = "#fff";
 	mCtx.beginPath();
-	mCtx.moveTo(pos,mCtx.canvas.height/2);
-	mCtx.lineTo(pos,mCtx.canvas.height/2+y);
-	mCtx.stroke();pos++;
+	mCtx.moveTo(lastpos.x,lastpos.y);
+	mCtx.lineTo(mCtx.canvas.width/2+x,mCtx.canvas.height/2+y);
+	lastpos.x = mCtx.canvas.width/2+x;
+	lastpos.y = mCtx.canvas.height/2+y;
+	mCtx.stroke();
+	pos++;
 	mCtx.clearRect(pos,0,1,500);
 	if(pos == 500){
 		pos=0;
 	}
 }
-
-function wavForm(ctx,x,y,id){
-	var pos = wavForm.pos[id ?? ctx.canvas.id]??0;
-	ctx.strokeStyle = "#fff";
-	ctx.beginPath();
-	ctx.moveTo(pos,ctx.canvas.height/2);
-	ctx.lineTo(pos,ctx.canvas.height/2+y);
-	ctx.stroke();
-	pos++;
-	ctx.fillStyle = "#0af";
-	ctx.fillRect(pos+1,0,1,ctx.canvas.height);
-	ctx.clearRect(pos,0,1,ctx.canvas.height);
-	if(pos == ctx.canvas.width){
-		pos=0;
-	}
-	wavForm.pos[ctx.canvas.id] = pos
-}
-wavForm.pos = {}
-
 const posData = {
 	mxe : document.getElementById("mx"),
 	mye : document.getElementById("my"),
@@ -42,8 +28,8 @@ const posData = {
 	y : 0,
 	mx : 0,
 	my : 0,
+	ids : {},
 	update(e){
-		console.log(e);
 		posData.x = e.offsetX,
 		posData.y = e.offsetY,
 		posData.mx = e.movementX,
@@ -52,7 +38,8 @@ const posData = {
 		posData.mye.innerHTML = posData.my;
 		posData.xe.innerHTML = posData.x;
 		posData.ye.innerHTML = posData.y;
-//		drawT(posData.x,posData.mx);
+//		drawT(posData.mx,posData.my);
+		xyGraph(mxyCtx,posData.mx,posData.my);
 		wavForm(mxCtx,0,posData.mx);
 		wavForm(myCtx,0,posData.my);
 	}
