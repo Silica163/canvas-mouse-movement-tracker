@@ -39,9 +39,9 @@ const posData = {
 		posData.xe.innerHTML = posData.x;
 		posData.ye.innerHTML = posData.y;
 //		drawT(posData.mx,posData.my);
-		xyGraph(mxyCtx,posData.mx,posData.my);
-		wavForm(mxCtx,0,posData.mx);
-		wavForm(myCtx,0,posData.my);
+		window.requestAnimationFrame(xyGraph.bind(this,posData.mx,posData.my));
+		window.requestAnimationFrame(wavForm.bind(this,mxCtx,posData.mx));
+		window.requestAnimationFrame(wavForm.bind(this,myCtx,posData.my));
 	}
 }
 console.log(posData);
