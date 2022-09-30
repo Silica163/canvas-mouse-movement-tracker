@@ -22,14 +22,14 @@ function xyGraph(ctx,x,y,paramId){
 xyGraph.pos = {};
 xyGraph.lastPos = {};
 
-function wavForm(ctx,value,id){
+function wavForm(ctx,x,y,id){
 	var id = id ?? ctx.canvas.id ?? wavForm.pos.length;
 	var pos = wavForm.pos[id]??0;
 	ctx.clearRect(pos,0,1,ctx.canvas.height);
 	ctx.strokeStyle = "#fff";
 	ctx.beginPath();
 	ctx.moveTo(pos,ctx.canvas.height/2);
-	ctx.lineTo(pos,ctx.canvas.height/2+value);
+	ctx.lineTo(pos,ctx.canvas.height/2+y);
 	ctx.stroke();
 	pos++;
 	ctx.fillStyle = "#0af";
