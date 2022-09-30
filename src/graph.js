@@ -11,12 +11,10 @@ function xyGraph(ctx,x,y,paramId){
 	lastpos.y = y;
 	ctx.stroke();
 	pos++;
-	ctx.fillStyle = "#0008"
-	ctx.fillRect(pos,0,1,ctx.canvas.height);
-	if(pos >= ctx.canvas.height){
-		pos=0;
+	ctx.clearRect(pos,0,1,ctx.canvas.height);
+	if(pos == ctx.canvas.height){
+		xyGraph.pos[id]=0;
 	}
-	xyGraph.pos[id] = pos;
 	xyGraph.lastPos[id] = lastpos;
 }
 xyGraph.pos = {};
