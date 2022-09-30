@@ -39,7 +39,7 @@ const posData = {
 		posData.xe.innerHTML = posData.x;
 		posData.ye.innerHTML = posData.y;
 //		drawT(posData.mx,posData.my);
-		window.requestAnimationFrame(xyGraph.bind(this,mCtx,posData.mx,posData.my));
+		window.requestAnimationFrame(xyGraph.bind(this,posData.mx,posData.my));
 		window.requestAnimationFrame(wavForm.bind(this,mxCtx,posData.mx));
 		window.requestAnimationFrame(wavForm.bind(this,myCtx,posData.my));
 	}
